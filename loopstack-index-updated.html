@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX/UI-дизайнер — сайты под ключ</title>
+<meta name="description" content="Независимый UX/UI-дизайнер. Дизайн, разработка и продвижение сайтов под ключ — от идеи до готового сайта. Сайт-визитка, лендинг, корпоративный сайт, интернет-магазин.">
+<meta name="theme-color" content="#000000">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --accent: #39FF14;
+    --muted: rgba(255, 255, 255, 0.55);
+    --soft: rgba(255, 255, 255, 0.72);
+    --line: rgba(255, 255, 255, 0.12);
+    --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sans: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--black);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: var(--white);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--black); }
+
+a { color: inherit; }
+
+button { font: inherit; }
+
+/* Кастомный курсор заменяет системный только на устройствах с мышью */
+@media (hover: hover) and (pointer: fine) {
+    body, a, button, input, textarea { cursor: none; }
+}
+
+/* Якорные секции не прячутся под фиксированной шапкой */
+.section, .hero { scroll-margin-top: 88px; }
+
+/* ============ Шапка ============ */
+
+.header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.35rem 4vw;
+    border-bottom: 1px solid transparent;
+    transition: background-color .4s ease, border-color .4s ease;
+}
+.header.scrolled {
+    background: rgba(0, 0, 0, 0.72);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.header__logo {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.header__logo .dot { color: var(--accent); }
+.header__nav { display: flex; gap: 2.2rem; }
+.header__link {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s ease;
+}
+.header__link:hover { color: var(--white); }
+
+/* Бургер для мобильного меню */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 24px;
+    background: none;
+    border: 0;
+    padding: 0;
+}
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--white);
+    transition: transform .3s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* ============ Кнопки ============ */
+
+.btn {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    background-color: var(--black);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 0.95rem 1.9rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    transition: all .3s cubic-bezier(.16, 1, .3, 1);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+.btn:hover {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+.btn:active { transform: translateY(0); }
+.btn--accent {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--black);
+}
+.btn--accent:hover { background-color: var(--white); border-color: var(--white); color: var(--black); }
+.btn--sm { padding: 0.72rem 1.4rem; font-size: 0.92rem; }
+
+/* Пульсирующая неоновая точка */
+.blinking-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+.blinking-dot::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    background-color: rgba(57, 255, 20, 0.45);
+    border-radius: 50%;
+    animation: wave-expand 2s infinite ease-in-out;
+}
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(0.85); box-shadow: 0 0 4px rgba(57, 255, 20, 0.3); }
+    50%      { opacity: 1;   transform: scale(1.1);  box-shadow: 0 0 12px rgba(57, 255, 20, 0.9); }
+}
+@keyframes wave-expand {
+    0%   { transform: scale(0.6); opacity: 0.9; }
+    100% { transform: scale(2.3); opacity: 0; }
+}
+
+/* ============ Hero ============ */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.video-container {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    z-index: 0;
+}
+#bg-video {
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    display: block;
+}
+#top-gradient {
+    position: absolute;
+    top: -30vh;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10vh 0 14vh;
+}
+.hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.6rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.3rem, 6vw, 4.6rem);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.6rem;
+    letter-spacing: -0.015em;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+}
+.hero-sub {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--soft);
+    max-width: 52ch;
+    margin-bottom: 2.4rem;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+}
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.hero-link {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding-bottom: 2px;
+    transition: color .3s ease, border-color .3s ease;
+}
+.hero-link:hover { color: var(--white); border-color: var(--white); }
+
+/* ============ Секции ============ */
+
+.section {
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+    padding: 12vh 6vw;
+}
+.section__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.eyebrow {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+}
+.section-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.6rem;
+    max-width: 22ch;
+}
+.section-lead {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--soft);
+    max-width: 62ch;
+}
+.section-lead + .section-lead { margin-top: 1.1rem; }
+.section-lead strong { color: var(--white); font-weight: 600; }
+
+/* Мягкое появление: сдвиг + расфокус + каскадная задержка */
+.reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    filter: blur(8px);
+    transition:
+        opacity .95s cubic-bezier(.16, 1, .3, 1),
+        transform .95s cubic-bezier(.16, 1, .3, 1),
+        filter .95s cubic-bezier(.16, 1, .3, 1);
+    transition-delay: var(--rd, 0s);
+    will-change: opacity, transform, filter;
+}
+.reveal.in-view { opacity: 1; transform: none; filter: blur(0); }
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+}
+
+/* ============ Обо мне ============ */
+
+.about__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4rem 5rem;
+    align-items: start;
+}
+.principles { list-style: none; }
+.principle {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    gap: 0 1.4rem;
+    padding: 1.7rem 0;
+    border-top: 1px solid var(--line);
+}
+.principle:last-child { border-bottom: 1px solid var(--line); }
+.principle__num {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding-top: 0.3rem;
+}
+.principle h3 {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+}
+.principle p {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 40ch;
+}
+
+/* ============ Процесс ============ */
+
+.steps { list-style: none; margin-top: 0.5rem; }
+.step {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 2.5rem;
+    padding: 2.4rem 0;
+    border-top: 1px solid var(--line);
+}
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step__num {
+    font-family: var(--sans);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+}
+.step h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.7rem;
+}
+.step p {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 60ch;
+}
+
+/* ============ Цены ============ */
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+    margin-top: 3.2rem;
+    text-align: left;
+}
+.price-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2.3rem 2.3rem 2.1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: border-color .35s ease, transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease;
+}
+.price-card:hover,
+.price-card:focus-visible {
+    border-color: rgba(57, 255, 20, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 0 26px rgba(57, 255, 20, 0.18), 0 18px 44px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+.price-card__name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+}
+.price-card__desc {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 1.7rem;
+    flex: 1;
+}
+.price-card__value {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+.price-card__value span {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+}
+.pricing-note {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-top: 2.4rem;
+    text-align: center;
+}
+
+/* ============ Контакты ============ */
+
+.contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem 5rem;
+    align-items: start;
+}
+.contact-direct {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 2;
+    color: var(--soft);
+    margin-top: 2rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.8rem;
+}
+.contact-direct a {
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: color .3s ease, border-color .3s ease;
+}
+.contact-direct a:hover { color: var(--accent); border-color: var(--accent); }
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2.4rem 2.4rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+.field { display: flex; flex-direction: column; gap: 0.5rem; }
+.field label,
+.field .field-label {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.field input,
+.field textarea {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    transition: border-color .3s ease;
+    resize: vertical;
+}
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.field input::placeholder,
+.field textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
+.service-choice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+.service-chip {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 9999px;
+    padding: 0.6rem 1.15rem;
+    transition: color .25s ease, background-color .25s ease, border-color .25s ease;
+}
+.service-chip:hover { color: var(--white); border-color: rgba(255, 255, 255, 0.45); }
+.service-chip.active {
+    color: var(--black);
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.form-note {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: var(--accent);
+    line-height: 1.5;
+}
+.form-note[hidden] { display: none; }
+
+/* ============ Футер ============ */
+
+.footer {
+    background: var(--black);
+    border-top: 1px solid var(--line);
+    padding: 5rem 6vw 3rem;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.footer-title {
+    font-family: var(--sans);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: -0.015em;
+}
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 1.8rem auto;
+    max-width: 1200px;
+    width: 100%;
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.footer-socials { display: flex; gap: 1.25rem; align-items: center; flex: 1; }
+.social-icon {
+    color: var(--muted);
+    transition: color .3s cubic-bezier(.16, 1, .3, 1), transform .3s cubic-bezier(.16, 1, .3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.social-icon:hover { color: var(--white); transform: translateY(-2px); }
+.footer-links { display: flex; gap: 2.4rem; justify-content: center; align-items: center; flex: 2; }
+.footer-link {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: opacity .3s ease, transform .3s ease;
+}
+.footer-link:hover { opacity: 0.7; transform: translateY(-1px); }
+.footer-copyright {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: right;
+    flex: 1;
+    letter-spacing: 0.02em;
+}
+
+/* ============ Кастомный курсор ============ */
+
+.cursor-ring-outline {
+    position: fixed;
+    top: 0; left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(57, 255, 20, 0.65);
+    border-radius: 50%;
+    z-index: 99998;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    will-change: transform, opacity;
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.55), 0 0 30px rgba(57, 255, 20, 0.28);
+    transition:
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.3s ease;
+}
+.cursor-ring-outline.active { opacity: 1; }
+
+/* Над ссылками и кнопками кольцо расширяется и разгорается */
+.cursor-ring-outline.expanded {
+    border-color: rgba(57, 255, 20, 1);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.75), 0 0 48px rgba(57, 255, 20, 0.4);
+}
+
+/* Над полями ввода курсор становится текстовой кареткой */
+.cursor-ring-outline.text {
+    width: 2px;
+    height: 22px;
+    border: none;
+    border-radius: 0;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.7);
+}
+
+/* ============ Появление: заголовок по словам ============ */
+
+.hero-title .word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.15em;
+    margin-bottom: -0.15em;
+}
+.hero-title .word-inner {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(105%);
+    filter: blur(20px);
+    animation: word-reveal-mask 1.3s cubic-bezier(0.05, 0.9, 0.1, 1) forwards;
+}
+@keyframes word-reveal-mask {
+    0%   { opacity: 0; transform: translateY(105%); filter: blur(20px); }
+    30%  { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* ============ Адаптив ============ */
+
+@media (max-width: 900px) {
+    .nav-toggle { display: flex; }
+    .header__cta { display: none; }
+    .header__nav {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(0, 0, 0, 0.94);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+        padding: 0.6rem 7vw 1.4rem;
+    }
+    .header__nav.open { display: flex; }
+    .header__nav .header__link { padding: 0.85rem 0; font-size: 1.1rem; }
+
+    .section { padding: 10vh 7vw; }
+    .about__grid,
+    .contact__grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    .step { grid-template-columns: 4.2rem 1fr; gap: 0 1.4rem; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+    .footer-links { justify-content: flex-start; flex-wrap: wrap; gap: 1.4rem; }
+    .footer-copyright { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- Кастомный курсор: кольцо -->
+<div id="cursor-ring" class="cursor-ring-outline"></div>
+
+<!-- Шапка -->
+<header class="header" id="header">
+    <a href="#hero" class="header__logo"><span class="dot">●</span>UX/UI</a>
+    <nav class="header__nav" id="header-nav">
+        <a href="#about" class="header__link">Обо мне</a>
+        <a href="#process" class="header__link">Процесс</a>
+        <a href="#pricing" class="header__link">Цены</a>
+        <a href="#contact" class="header__link">Контакты</a>
+    </nav>
+    <a href="#contact" class="btn btn--sm btn--accent header__cta">Оставить заявку</a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="header-nav">
+        <span></span><span></span>
+    </button>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline id="bg-video">
+                <source src="https://api.getlayers.ai/storage/v1/object/public/public/assets/loopstack-f8c64439bf/flower.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+
+        <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/loopstack-f8c64439bf/black_gradient.svg" alt="Top Gradient" id="top-gradient">
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">UX/UI · Дизайн · Разработка · Продвижение</p>
+            <h1 class="hero-title">Сайт, который продаёт <br> и запоминается.</h1>
+            <p class="hero-sub">Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn--accent">
+                    <span class="btn-text">Оставить заявку</span>
+                    <span class="blinking-dot"></span>
+                </a>
+                <a href="#process" class="hero-link">Как я работаю ↓</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section class="section" id="about">
+        <div class="section__inner">
+            <p class="eyebrow reveal">01 · Обо мне</p>
+            <h2 class="section-title reveal">Один человек — весь проект от идеи до запуска</h2>
+            <div class="about__grid">
+                <div class="about__intro">
+                    <p class="section-lead reveal">Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.</p>
+                    <p class="section-lead reveal" style="--rd:0.1s">Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.</p>
+                </div>
+                <ul class="principles">
+                    <li class="principle reveal" style="--rd:0s">
+                        <span class="principle__num">01</span>
+                        <div>
+                            <h3>Дизайн с нуля</h3>
+                            <p>Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.</p>
+                        </div>
+                    </li>
+                    <li class="principle reveal" style="--rd:0.12s">
+                        <span class="principle__num">02</span>
+                        <div>
+                            <h3>Смысл прежде формы</h3>
+                            <p>Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.</p>
+                        </div>
+                    </li>
+                    <li class="principle reveal" style="--rd:0.24s">
+                        <span class="principle__num">03</span>
+                        <div>
+                            <h3>До запуска и дальше</h3>
+                            <p>Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Процесс -->
+    <section class="section" id="process">
+        <div class="section__inner">
+            <p class="eyebrow reveal">02 · Процесс</p>
+            <h2 class="section-title reveal">Как я работаю</h2>
+            <ol class="steps">
+                <li class="step reveal" style="--rd:0s">
+                    <span class="step__num">01</span>
+                    <div>
+                        <h3>Брифинг</h3>
+                        <p>Разбираем задачу, цели и аудиторию. Вы получаете понятный план и точную оценку.</p>
+                    </div>
+                </li>
+                <li class="step reveal" style="--rd:0.1s">
+                    <span class="step__num">02</span>
+                    <div>
+                        <h3>Прототип и дизайн</h3>
+                        <p>Структура и UX/UI. Вы видите, как сайт будет выглядеть, ещё до разработки.</p>
+                    </div>
+                </li>
+                <li class="step reveal" style="--rd:0.2s">
+                    <span class="step__num">03</span>
+                    <div>
+                        <h3>Разработка</h3>
+                        <p>Вёрстка, адаптив, анимация. Сайт быстро загружается и корректно работает на всех устройствах.</p>
+                    </div>
+                </li>
+                <li class="step reveal" style="--rd:0.3s">
+                    <span class="step__num">04</span>
+                    <div>
+                        <h3>Запуск и продвижение</h3>
+                        <p>Публикация, базовая SEO-настройка, первые заявки и сопровождение.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="section" id="pricing">
+        <div class="section__inner">
+            <p class="eyebrow reveal">03 · Цены</p>
+            <h2 class="section-title reveal">Услуги и цены</h2>
+            <div class="pricing-grid">
+                <div class="reveal" style="--rd:0s">
+                    <article class="price-card" data-service="Сайт-визитка" role="button" tabindex="0" aria-label="Сайт-визитка — оставить заявку">
+                        <h3 class="price-card__name">Сайт-визитка</h3>
+                        <p class="price-card__desc">Точечное цифровое представительство. Формирует первое впечатление и аккуратно закрывает базовые вопросы клиента.</p>
+                        <p class="price-card__value">от <span>7 500 ₽</span></p>
+                    </article>
+                </div>
+                <div class="reveal" style="--rd:0.1s">
+                    <article class="price-card" data-service="Landing Page" role="button" tabindex="0" aria-label="Landing Page — оставить заявку">
+                        <h3 class="price-card__name">Landing Page</h3>
+                        <p class="price-card__desc">Промо-страница с акцентом на один продукт или услугу. Выверенная смысловая структура и фокусировка внимания.</p>
+                        <p class="price-card__value">от <span>15 000 ₽</span></p>
+                    </article>
+                </div>
+                <div class="reveal" style="--rd:0.2s">
+                    <article class="price-card" data-service="Корпоративный сайт" role="button" tabindex="0" aria-label="Корпоративный сайт — оставить заявку">
+                        <h3 class="price-card__name">Корпоративный сайт</h3>
+                        <p class="price-card__desc">Многостраничная система для репрезентации бизнеса, каталога решений и демонстрации масштаба компании.</p>
+                        <p class="price-card__value">от <span>30 000 ₽</span></p>
+                    </article>
+                </div>
+                <div class="reveal" style="--rd:0.3s">
+                    <article class="price-card" data-service="E-Commerce" role="button" tabindex="0" aria-label="E-Commerce — оставить заявку">
+                        <h3 class="price-card__name">E-Commerce</h3>
+                        <p class="price-card__desc">Полнофункциональный цифровой магазин: каталог, гибкие фильтры, автономная корзина и интеграция эквайринга.</p>
+                        <p class="price-card__value">от <span>50 000 ₽</span></p>
+                    </article>
+                </div>
+            </div>
+            <p class="pricing-note reveal">Точную стоимость назову после брифинга — он бесплатный и ни к чему не обязывает.</p>
+        </div>
+    </section>
+
+    <!-- Контакты / заявка -->
+    <section class="section" id="contact">
+        <div class="section__inner">
+            <p class="eyebrow reveal">04 · Контакты</p>
+            <div class="contact__grid">
+                <div>
+                    <h2 class="section-title reveal">Оставить заявку</h2>
+                    <p class="section-lead reveal">Если вы хотите себе современный сайт с продвижением — заполните заявку, и я с вами свяжусь.</p>
+                    <p class="contact-direct reveal">
+                        Или напишите напрямую:<br>
+                        <a href="mailto:websssites@gmail.com">websssites@gmail.com</a><br>
+                        Telegram: <a href="https://t.me/Vadia328">@Vadia328</a>
+                    </p>
+                </div>
+                <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/websssites@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Новая заявка с сайта">
+                    <input type="hidden" name="service" id="f-service">
+                    <div class="field">
+                        <label for="f-name">Имя</label>
+                        <input id="f-name" name="name" type="text" placeholder="Как к вам обращаться" required>
+                    </div>
+                    <div class="field">
+                        <label for="f-contact">Email или Telegram</label>
+                        <input id="f-contact" name="contact" type="text" placeholder="Куда вам ответить" required>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Услуга</span>
+                        <div class="service-choice" id="service-choice" role="radiogroup" aria-label="Услуга">
+                            <button type="button" class="service-chip" data-service="Сайт-визитка" role="radio" aria-checked="false">Сайт-визитка</button>
+                            <button type="button" class="service-chip" data-service="Landing Page" role="radio" aria-checked="false">Landing Page</button>
+                            <button type="button" class="service-chip" data-service="Корпоративный сайт" role="radio" aria-checked="false">Корпоративный сайт</button>
+                            <button type="button" class="service-chip" data-service="E-Commerce" role="radio" aria-checked="false">E-Commerce</button>
+                        </div>
+                    </div>
+                    <button class="btn btn--accent" type="submit">Отправить заявку</button>
+                    <p class="form-note" id="form-note" hidden></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="footer-top">
+        <h2 class="footer-title">Остаёмся на связи</h2>
+        <h2 class="footer-title">Думаю. Создаю. Улучшаю.</h2>
+    </div>
+
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ===== Появление заголовка по словам (снизу вверх, с блюром) =====
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const html = heroTitle.innerHTML;
+        const parts = html.split(/(\s+|<br\s*\/?>)/i);
+        heroTitle.innerHTML = '';
+        let wordIndex = 0;
+        parts.forEach(part => {
+            if (part.trim() === '') {
+                heroTitle.appendChild(document.createTextNode(' '));
+            } else if (part.toLowerCase().startsWith('<br')) {
+                heroTitle.appendChild(document.createElement('br'));
+            } else {
+                const wrapper = document.createElement('span');
+                wrapper.className = 'word-wrapper';
+                const inner = document.createElement('span');
+                inner.className = 'word-inner';
+                inner.textContent = part;
+                inner.style.animationDelay = `${wordIndex * 0.1}s`;
+                wordIndex++;
+                wrapper.appendChild(inner);
+                heroTitle.appendChild(wrapper);
+            }
+        });
+    }
+
+    // ===== Кастомный курсор: кольцо с точкой, меняет форму по контексту =====
+    const ring = document.getElementById('cursor-ring');
+
+    if (ring) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+        let isFirstMove = true;
+        let scale = 0;
+        let targetScale = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (isFirstMove) {
+                ringX = mouseX;
+                ringY = mouseY;
+                isFirstMove = false;
+                ring.classList.add('active');
+            }
+            targetScale = 1;
+        });
+
+        document.addEventListener('mouseleave', () => { targetScale = 0; });
+
+        // Форма курсора зависит от того, над чем он сейчас находится
+        document.addEventListener('mouseover', (e) => {
+            let state = 'default';
+            const target = e.target;
+            if (target.closest && target.closest('input, textarea')) {
+                state = 'text';
+            } else if (target.closest && target.closest('a, button')) {
+                state = 'link';
+            }
+            ring.classList.toggle('expanded', state === 'link');
+            ring.classList.toggle('text', state === 'text');
+        });
+
+        const updatePhysics = () => {
+            ringX = mouseX;
+            ringY = mouseY;
+            scale += (targetScale - scale) * 0.15;
+            const factor = ring.classList.contains('expanded') ? 1.6 : 1;
+            ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${scale * factor})`;
+            requestAnimationFrame(updatePhysics);
+        };
+        updatePhysics();
+    }
+
+    // ===== Шапка становится плотнее после прокрутки =====
+    const header = document.getElementById('header');
+    const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ===== Мобильное меню =====
+    const navToggle = document.getElementById('nav-toggle');
+    const headerNav = document.getElementById('header-nav');
+    if (navToggle && headerNav) {
+        navToggle.addEventListener('click', () => {
+            const open = headerNav.classList.toggle('open');
+            navToggle.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+        });
+        headerNav.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                headerNav.classList.remove('open');
+                navToggle.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    // ===== Мягкое появление секций при скролле (каскад задан через --rd) =====
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach((el) => io.observe(el));
+    } else {
+        revealEls.forEach((el) => el.classList.add('in-view'));
+    }
+
+    // ===== Выбор услуги: карточки цен и чипы в форме связаны =====
+    let selectedService = '';
+
+    function setService(service) {
+        selectedService = service;
+        document.querySelectorAll('.service-chip').forEach((chip) => {
+            const active = chip.getAttribute('data-service') === service;
+            chip.classList.toggle('active', active);
+            chip.setAttribute('aria-checked', active ? 'true' : 'false');
+        });
+    }
+
+    document.querySelectorAll('.service-chip').forEach((chip) => {
+        chip.addEventListener('click', () => setService(chip.getAttribute('data-service')));
+    });
+
+    document.querySelectorAll('.price-card').forEach((card) => {
+        const service = card.getAttribute('data-service');
+        const go = () => {
+            setService(service);
+            const contactSection = document.getElementById('contact');
+            if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        card.addEventListener('click', go);
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                go();
+            }
+        });
+    });
+
+    // ===== Форма: стандартная отправка через FormSubmit =====
+    const form = document.getElementById('contact-form');
+    const formNote = document.getElementById('form-note');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            if (!selectedService) {
+                e.preventDefault();
+                if (formNote) {
+                    formNote.hidden = false;
+                    formNote.textContent = 'Выберите услугу из списка.';
+                }
+                return;
+            }
+            form.elements.namedItem('service').value = selectedService;
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Отправляем…';
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
