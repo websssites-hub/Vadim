@@ -81,6 +81,10 @@ button { font: inherit; }
 }
 .header__logo .dot { color: var(--accent); }
 .header__nav { display: flex; gap: 2.2rem; }
+.language-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.04); }
+.language-toggle button { border: 0; border-radius: 999px; padding: .48rem .7rem; background: transparent; color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .06em; transition: background .25s ease, color .25s ease; }
+.language-toggle button[aria-pressed="true"] { background: var(--accent); color: var(--black); }
+@media (max-width: 760px) { .language-toggle { margin-left: auto; } .language-toggle button { padding: .42rem .58rem; } }
 .header__link {
     font-family: var(--sans);
     font-size: 0.95rem;
@@ -736,6 +740,10 @@ button { font: inherit; }
         <a href="#pricing" class="header__link">Цены</a>
         <a href="#contact" class="header__link">Контакты</a>
     </nav>
+    <div class="language-toggle" role="group" aria-label="Выбор языка">
+        <button type="button" data-language="ru" aria-pressed="true">RU</button>
+        <button type="button" data-language="en" aria-pressed="false">EN</button>
+    </div>
     <a href="#contact" class="btn btn--sm btn--accent header__cta">Оставить заявку</a>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="header-nav">
         <span></span><span></span>
@@ -935,6 +943,124 @@ button { font: inherit; }
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // RU/EN translations for the complete page.
+    const translations = {
+        ru: {
+            title: 'UX/UI-дизайнер — сайты под ключ',
+            description: 'Независимый UX/UI-дизайнер. Дизайн, разработка и продвижение сайтов под ключ — от идеи до готового сайта. Сайт-визитка, лендинг, корпоративный сайт, интернет-магазин.',
+            nav: ['Обо мне', 'Процесс', 'Цены', 'Контакты'],
+            cta: 'Оставить заявку', menuOpen: 'Открыть меню', menuClose: 'Закрыть меню',
+            heroEyebrow: 'UX/UI · Дизайн · Разработка · Продвижение',
+            heroTitle: 'Сайт, который продаёт <br> и запоминается.',
+            heroSub: 'Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.',
+            heroLink: 'Как я работаю ↓', aboutEyebrow: '01 · Обо мне', aboutTitle: 'Один человек — весь проект от идеи до запуска',
+            aboutLead: ['Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.', 'Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.'],
+            principles: [['Дизайн с нуля', 'Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.'], ['Смысл прежде формы', 'Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.'], ['До запуска и дальше', 'Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.']],
+            processEyebrow: '02 · Процесс', processTitle: 'Как я работаю',
+            steps: [['Брифинг', 'Разбираем задачу, цели и аудиторию. Вы получаете понятный план и точную оценку.'], ['Прототип и дизайн', 'Структура и UX/UI. Вы видите, как сайт будет выглядеть, ещё до разработки.'], ['Разработка', 'Вёрстка, адаптив, анимация. Сайт быстро загружается и корректно работает на всех устройствах.'], ['Запуск и продвижение', 'Публикация, базовая SEO-настройка, первые заявки и сопровождение.']],
+            pricingEyebrow: '03 · Цены', pricingTitle: 'Услуги и цены',
+            services: [
+                ['Сайт-визитка', 'Точечное цифровое представительство. Формирует первое впечатление и аккуратно закрывает базовые вопросы клиента.', 'от'],
+                ['Landing Page', 'Промо-страница с акцентом на один продукт или услугу. Выверенная смысловая структура и фокусировка внимания.', 'от'],
+                ['Корпоративный сайт', 'Многостраничная система для репрезентации бизнеса, каталога решений и демонстрации масштаба компании.', 'от'],
+                ['E-Commerce', 'Полнофункциональный цифровой магазин: каталог, гибкие фильтры, автономная корзина и интеграция эквайринга.', 'от']
+            ],
+            pricingNote: 'Точную стоимость назову после брифинга — он бесплатный и ни к чему не обязывает.', contactEyebrow: '04 · Контакты', contactTitle: 'Оставить заявку',
+            contactLead: 'Если вы хотите себе современный сайт с продвижением — заполните заявку, и я с вами свяжусь.', direct: 'Или напишите напрямую:', name: 'Имя', namePlaceholder: 'Как к вам обращаться', contact: 'Email или Telegram', contactPlaceholder: 'Куда вам ответить', service: 'Услуга',
+            formServices: ['Сайт-визитка', 'Landing Page', 'Корпоративный сайт', 'E-Commerce'], submit: 'Отправить заявку', subject: 'Новая заявка с сайта', requiredService: 'Выберите услугу из списка.', sending: 'Отправляем…',
+            footer: ['Остаёмся на связи', 'Думаю. Создаю. Улучшаю.'], language: 'Выбор языка'
+        },
+        en: {
+            title: 'UX/UI Designer — Websites, Made to Work',
+            description: 'Independent UX/UI designer. End-to-end website design, development, and promotion — from first idea to launch. Portfolio sites, landing pages, business websites, and online stores.',
+            nav: ['About', 'Process', 'Services', 'Contact'],
+            cta: 'Start a project', menuOpen: 'Open menu', menuClose: 'Close menu',
+            heroEyebrow: 'UX/UI · Design · Development · Growth',
+            heroTitle: 'Websites that work <br> and stay memorable.',
+            heroSub: 'End-to-end design, development, and promotion — from first idea to launch.',
+            heroLink: 'How I work ↓', aboutEyebrow: '01 · About', aboutTitle: 'One person, guiding your project from idea to launch',
+            aboutLead: ['I’m an independent UX/UI designer. I take projects from the first idea to a finished website, working directly with you at every step.', 'I take on a small number of projects and give each one proper attention: first the message and structure, then the design, then the code. The result is a website built to convert and made to last.'],
+            principles: [['Designed from scratch', 'No templates or page builders. Every project is designed around your goals and your audience.'], ['Clarity before visuals', 'First the user journey and structure, then the visual design. Good design makes things easier to use.'], ['There for the launch and beyond', 'I take the project beyond the mockup: development, responsive layouts, promotion, and support after launch.']],
+            processEyebrow: '02 · Process', processTitle: 'How I work',
+            steps: [['Discovery', 'We discuss your goals, audience, and requirements. You get a clear plan and project estimate.'], ['Prototype & design', 'I shape the structure and UX/UI. You see how the website will look before development begins.'], ['Development', 'Responsive build and motion. Your site loads quickly and works smoothly across devices.'], ['Launch & growth', 'I publish the site, set up basic SEO, and help you get started with enquiries and ongoing support.']],
+            pricingEyebrow: '03 · Services', pricingTitle: 'Services & pricing',
+            services: [
+                ['Portfolio website', 'A focused online presence that makes a strong first impression and answers your clients’ key questions.', 'from'],
+                ['Landing page', 'A focused page for one product or service, with a clear message and a well-planned user journey.', 'from'],
+                ['Business website', 'A multi-page website to present your business, showcase your services, and support future growth.', 'from'],
+                ['Online store', 'A complete e-commerce experience with a product catalogue, flexible filters, cart, and payment integration.', 'from']
+            ],
+            pricingNote: 'I’ll confirm the exact price after our discovery call. It’s free and comes with no obligation.', contactEyebrow: '04 · Contact', contactTitle: 'Tell me about your project',
+            contactLead: 'Looking for a modern website that helps your business grow? Send a request and I’ll get back to you.', direct: 'Or get in touch directly:', name: 'Name', namePlaceholder: 'What should I call you?', contact: 'Email or Telegram', contactPlaceholder: 'Where can I reach you?', service: 'Service',
+            formServices: ['Portfolio website', 'Landing page', 'Business website', 'Online store'], submit: 'Send enquiry', subject: 'New website enquiry', requiredService: 'Please choose a service.', sending: 'Sending…',
+            footer: ['Let’s stay in touch', 'Think. Create. Improve.'], language: 'Choose language'
+        }
+    };
+
+    let currentLanguage = 'ru';
+    let selectedService = '';
+    const formNote = document.getElementById('form-note');
+    const languageButtons = document.querySelectorAll('[data-language]');
+    const setLanguage = (language) => {
+        const t = translations[language] || translations.ru;
+        const selectedServiceIndex = selectedService ? translations[currentLanguage].formServices.indexOf(selectedService) : -1;
+        currentLanguage = language;
+        if (selectedServiceIndex >= 0) selectedService = t.formServices[selectedServiceIndex];
+        document.documentElement.lang = language;
+        document.title = t.title;
+        document.querySelector('meta[name="description"]')?.setAttribute('content', t.description);
+        document.querySelectorAll('.header__nav a').forEach((el, i) => el.textContent = t.nav[i]);
+        document.querySelector('.header__cta').textContent = t.cta;
+        document.querySelector('.nav-toggle').setAttribute('aria-label', t.menuOpen);
+        document.querySelector('.language-toggle').setAttribute('aria-label', t.language);
+        document.querySelector('.hero-eyebrow').textContent = t.heroEyebrow;
+        document.querySelector('.hero-title').innerHTML = t.heroTitle;
+        document.querySelector('.hero-sub').textContent = t.heroSub;
+        document.querySelector('.hero-actions .btn-text').textContent = t.cta;
+        document.querySelector('.hero-link').textContent = t.heroLink;
+        document.querySelector('#about .eyebrow').textContent = t.aboutEyebrow;
+        document.querySelector('#about .section-title').textContent = t.aboutTitle;
+        document.querySelectorAll('.about__intro .section-lead').forEach((el, i) => el.textContent = t.aboutLead[i]);
+        document.querySelectorAll('.principle').forEach((el, i) => { el.querySelector('h3').textContent = t.principles[i][0]; el.querySelector('p').textContent = t.principles[i][1]; });
+        document.querySelector('#process .eyebrow').textContent = t.processEyebrow;
+        document.querySelector('#process .section-title').textContent = t.processTitle;
+        document.querySelectorAll('.step').forEach((el, i) => { el.querySelector('h3').textContent = t.steps[i][0]; el.querySelector('p').textContent = t.steps[i][1]; });
+        document.querySelector('#pricing .eyebrow').textContent = t.pricingEyebrow;
+        document.querySelector('#pricing .section-title').textContent = t.pricingTitle;
+        document.querySelectorAll('.price-card').forEach((el, i) => {
+            el.querySelector('.price-card__name').textContent = t.services[i][0];
+            el.querySelector('.price-card__desc').textContent = t.services[i][1];
+            el.querySelector('.price-card__value').firstChild.textContent = t.services[i][2] + ' ';
+            el.setAttribute('data-service', t.formServices[i]);
+            el.setAttribute('aria-label', t.formServices[i] + (language === 'ru' ? ' — оставить заявку' : ' — start an enquiry'));
+        });
+        document.querySelector('.pricing-note').textContent = t.pricingNote;
+        document.querySelector('#contact .eyebrow').textContent = t.contactEyebrow;
+        document.querySelector('#contact .section-title').textContent = t.contactTitle;
+        document.querySelector('#contact .section-lead').textContent = t.contactLead;
+        document.querySelector('.contact-direct').firstChild.textContent = t.direct + '\n';
+        document.querySelector('label[for="f-name"]').textContent = t.name;
+        document.querySelector('#f-name').placeholder = t.namePlaceholder;
+        document.querySelector('label[for="f-contact"]').textContent = t.contact;
+        document.querySelector('#f-contact').placeholder = t.contactPlaceholder;
+        document.querySelector('.field-label').textContent = t.service;
+        document.querySelector('#service-choice').setAttribute('aria-label', t.service);
+        document.querySelectorAll('.service-chip').forEach((el, i) => { el.textContent = t.formServices[i]; el.setAttribute('data-service', t.formServices[i]); });
+        document.querySelector('input[name="_subject"]').value = t.subject;
+        document.querySelector('button[type="submit"]').textContent = t.submit;
+        document.querySelectorAll('.footer-title').forEach((el, i) => el.textContent = t.footer[i]);
+        languageButtons.forEach((el) => el.setAttribute('aria-pressed', el.dataset.language === language ? 'true' : 'false'));
+        if (formNote) formNote.textContent = t.requiredService;
+        localStorage.setItem('vadim-site-language', language);
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', language);
+        history.replaceState({}, '', url);
+    };
+    const params = new URLSearchParams(window.location.search);
+    const requestedLanguage = params.get('lang');
+    const savedLanguage = localStorage.getItem('vadim-site-language');
+    setLanguage(requestedLanguage === 'en' || requestedLanguage === 'ru' ? requestedLanguage : (savedLanguage === 'en' ? 'en' : 'ru'));
+    languageButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.language)));
     // ===== Появление заголовка по словам (снизу вверх, с блюром) =====
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
@@ -1027,13 +1153,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const open = headerNav.classList.toggle('open');
             navToggle.classList.toggle('open', open);
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            navToggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+            navToggle.setAttribute('aria-label', open ? translations[currentLanguage].menuClose : translations[currentLanguage].menuOpen);
         });
         headerNav.querySelectorAll('a').forEach((link) => {
             link.addEventListener('click', () => {
                 headerNav.classList.remove('open');
                 navToggle.classList.remove('open');
                 navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.setAttribute('aria-label', translations[currentLanguage].menuOpen);
             });
         });
     }
@@ -1055,9 +1182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== Выбор услуги: карточки цен и чипы в форме связаны =====
-    let selectedService = '';
-
-    function setService(service) {
+function setService(service) {
         selectedService = service;
         document.querySelectorAll('.service-chip').forEach((chip) => {
             const active = chip.getAttribute('data-service') === service;
@@ -1073,7 +1198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.price-card').forEach((card) => {
         const service = card.getAttribute('data-service');
         const go = () => {
-            setService(service);
+            setService(card.getAttribute('data-service'));
             const contactSection = document.getElementById('contact');
             if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
@@ -1088,14 +1213,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Форма: стандартная отправка через FormSubmit =====
     const form = document.getElementById('contact-form');
-    const formNote = document.getElementById('form-note');
     if (form) {
         form.addEventListener('submit', (e) => {
             if (!selectedService) {
                 e.preventDefault();
                 if (formNote) {
                     formNote.hidden = false;
-                    formNote.textContent = 'Выберите услугу из списка.';
+                    formNote.textContent = translations[currentLanguage].requiredService;
                 }
                 return;
             }
@@ -1103,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitButton = form.querySelector('button[type="submit"]');
             if (submitButton) {
                 submitButton.disabled = true;
-                submitButton.textContent = 'Отправляем…';
+                submitButton.textContent = translations[currentLanguage].sending;
             }
         });
     }
