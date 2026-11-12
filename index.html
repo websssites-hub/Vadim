@@ -54,7 +54,7 @@ h1,h2,h3,p{margin:0}
 .links a:hover{color:var(--fg)}
 .nav-r{display:flex;align-items:center;gap:8px}
 .seg{display:flex;padding:3px;border:1px solid var(--line-2);border-radius:999px}
-.seg button{height:38px;min-width:44px;border:0;border-radius:999px;background:transparent;color:var(--mute);font:700 12px var(--f-d);cursor:pointer;transition:background .2s,color .2s}
+.seg button{height:42px;min-width:44px;border:0;border-radius:999px;background:transparent;color:var(--mute);font:700 12px var(--f-d);cursor:pointer;transition:background .2s,color .2s}
 .seg button[aria-pressed="true"]{background:var(--lime);color:var(--bg)}
 .pill{height:44px;padding:0 20px;display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;border:0;cursor:pointer;transition:background .2s}
 .pill:hover{background:var(--lime)}
@@ -127,20 +127,32 @@ h1,h2,h3,p{margin:0}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* about */
-.about{padding-block:clamp(90px,11vw,150px) clamp(80px,9vw,120px);display:flex;flex-direction:column;gap:80px}
-.about-top{display:flex;flex-wrap:wrap;gap:40px 80px}
-.about-top>div:first-child{flex:1 1 500px;display:flex;flex-direction:column;gap:28px;min-width:0}
-#aboutTitle{font-weight:600;font-size:clamp(30px,4.2vw,62px);line-height:1.08;letter-spacing:-.035em}
-.about-p{flex:1 1 360px;max-width:520px;display:flex;flex-direction:column;gap:20px;padding-top:44px;font-size:18px;color:var(--mute)}
-.about-p p:first-child{color:var(--fg)}
-.vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
-.val{padding:36px 32px 40px;border-radius:24px;background:var(--bg-2);border:1px solid var(--line);display:flex;flex-direction:column;gap:56px;min-height:300px;transition:border-color .3s}
-.val:hover{border-color:var(--lime)}
-.val-t{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-d);font-size:14px;color:var(--mute)}
-.plus{width:44px;height:44px;border-radius:50%;border:1px solid #2E2E33;display:inline-flex;align-items:center;justify-content:center;color:var(--lime);transition:transform .4s}
-.val:hover .plus{transform:rotate(90deg)}
-.val h3{font-family:var(--f-d);font-weight:600;font-size:24px;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
-.val p{font-size:16px;color:var(--mute)}
+.about{position:relative;z-index:1;padding-block:clamp(96px,12vw,170px) clamp(110px,12vw,180px);display:flex;flex-direction:column;gap:clamp(56px,7vw,96px);transform-origin:50% 0}
+.ab-head{display:flex;flex-direction:column;gap:28px}
+#aboutTitle{font-weight:600;font-size:clamp(36px,6vw,96px);line-height:1.02;letter-spacing:-.045em;max-width:13ch;text-wrap:balance}
+#aboutTitle .hl{color:var(--lime)}
+.ab-lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 6vw;align-items:start}
+.ab-lead .big{grid-column:2;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:var(--fg);max-width:34ch}
+.ab-lead .small{grid-column:2;font-size:16px;color:var(--mute);max-width:44ch}
+.vals{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.val{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:16px 4vw;align-items:baseline;padding:clamp(26px,3vw,40px) 0;border-top:1px solid var(--line);cursor:default}
+.val-n{font-family:var(--f-d);font-size:14px;font-weight:500;color:var(--lime)}
+.val h3{font-family:var(--f-d);font-weight:600;font-size:clamp(24px,2.6vw,40px);letter-spacing:-.035em;line-height:1.05;transition:transform .5s cubic-bezier(.2,.8,.2,1),color .3s}
+.val p{font-size:16px;color:var(--mute);max-width:40ch}
+@media (hover:hover){.val:hover h3{transform:translateX(14px);color:var(--lime)}}
+@media (max-width:760px){
+  .ab-lead{grid-template-columns:1fr}.ab-lead .big,.ab-lead .small{grid-column:1}
+  .val{grid-template-columns:40px minmax(0,1fr)}.val p{grid-column:2}
+}
+.strike{grid-column:2;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,22px)}
+.st-row{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--f-d);font-weight:500;font-size:clamp(22px,2.3vw,36px);letter-spacing:-.035em;line-height:1.15;color:#6E6C66}
+.st{position:relative;display:inline-block}
+.st i{position:absolute;left:-3%;right:-3%;top:54%;height:.11em;border-radius:99px;background:var(--lime);transform-origin:left center}
+.only{font-family:var(--f-d);font-weight:700;font-size:clamp(30px,3.6vw,56px);letter-spacing:-.045em;line-height:1.02;color:var(--fg)}
+.only .hl{color:var(--lime)}
+.ab-text{grid-column:2;display:flex;flex-direction:column;gap:14px;max-width:46ch;font-size:16px;color:var(--mute)}
+@media (max-width:760px){.strike,.ab-text{grid-column:1}}
+.process{position:relative;z-index:2;box-shadow:0 -30px 80px rgba(0,0,0,.45)}
 
 /* paper act */
 .paper{background:var(--paper);color:var(--bg)}
@@ -215,6 +227,8 @@ legend{font-size:14px;color:var(--mute);padding:0;margin-bottom:14px}
 #motto{font-weight:800;font-size:clamp(36px,8.6vw,140px);line-height:.98;letter-spacing:-.055em}
 .foot-b{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--mute)}
 
+#prog{display:none;position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:var(--lime);transform-origin:left;transform:scaleX(0)}
+section[id]{scroll-margin-top:84px}
 #cur{position:fixed;left:0;top:0;z-index:90;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--lime);mix-blend-mode:difference;pointer-events:none;opacity:0}
 @media (pointer:coarse){#cur{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -225,6 +239,7 @@ legend{font-size:14px;color:var(--mute);padding:0;margin-bottom:14px}
 
 <div id="pre" hidden aria-hidden="true"><span>websssites</span><b id="preN">0</b></div>
 <div id="cur" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <a class="brand" href="#hero"><i></i>websssites</a>
@@ -275,15 +290,25 @@ legend{font-size:14px;color:var(--mute);padding:0;margin-bottom:14px}
 </div></div>
 
 <section class="about wrap" id="about">
-  <div class="about-top">
-    <div><p class="label" data-k="aboutLabel">Обо мне</p><h2 class="d" id="aboutTitle" data-k="aboutTitle">Один человек — весь проект от идеи до запуска</h2></div>
-    <div class="about-p"><p data-rv data-k="aboutP1">Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.</p><p data-rv data-k="aboutP2">Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.</p></div>
+  <div class="ab-head">
+    <p class="label" data-k="aboutLabel">Обо мне</p>
+    <h2 class="d" id="aboutTitle"><span data-k="aT1">Один человек —</span> <span class="hl" data-k="aT2">весь проект</span> <span data-k="aT3">от идеи до запуска.</span></h2>
   </div>
-  <div class="vals" id="vals">
-    <article class="val"><div class="val-t"><span>01</span><span class="plus" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></div><div><h3 data-k="v1t">Дизайн с нуля</h3><p data-k="v1d">Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.</p></div></article>
-    <article class="val"><div class="val-t"><span>02</span><span class="plus" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></div><div><h3 data-k="v2t">Смысл прежде формы</h3><p data-k="v2d">Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.</p></div></article>
-    <article class="val"><div class="val-t"><span>03</span><span class="plus" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></div><div><h3 data-k="v3t">До запуска и дальше</h3><p data-k="v3d">Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.</p></div></article>
+  <div class="ab-lead">
+    <div class="strike" id="strike">
+      <p class="st-row" aria-hidden="true"><span class="st"><span data-k="s3">посредники</span><i></i></span></p>
+      <p class="only" id="only"><span data-k="only1">Только</span> <span class="hl" data-k="only2">я и ваш проект.</span></p>
+    </div>
+    <div class="ab-text">
+      <p data-rv data-k="aboutP1">Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.</p>
+      <p data-rv data-k="aboutP2">Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.</p>
+    </div>
   </div>
+  <ol class="vals" id="vals">
+    <li class="val"><span class="val-n">01</span><h3 data-k="v1t">Дизайн с нуля</h3><p data-k="v1d">Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.</p></li>
+    <li class="val"><span class="val-n">02</span><h3 data-k="v2t">Смысл прежде формы</h3><p data-k="v2d">Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.</p></li>
+    <li class="val"><span class="val-n">03</span><h3 data-k="v3t">До запуска и дальше</h3><p data-k="v3d">Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.</p></li>
+  </ol>
 </section>
 
 <section class="paper process" id="process">
@@ -360,7 +385,7 @@ const D={
 ru:{navAbout:'Обо мне',navProcess:'Процесс',navPricing:'Цены',navContact:'Контакты',cta:'Оставить заявку',how:'Как я работаю ↓',
 kicker:'UX/UI · Дизайн · Разработка · Продвижение',h1a:'Сайт, который',h1b:'продаёт',h1c:'и запоминается.',
 heroSub:'Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.',motto:'Думаю. Создаю. Улучшаю.',
-aboutLabel:'Обо мне',aboutTitle:'Один человек — весь проект от идеи до запуска',
+aboutLabel:'Обо мне',aT1:'Один человек —',aT2:'весь проект',aT3:'от идеи до запуска.',p1a:'Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта —',p1m:'без посредников',p1b:', напрямую с тем, кто делает.',c0:'Беру мало проектов и делаю их качественно:',c1:'Смысл и структура',c2:'Дизайн',c3:'Код',c4:'Сайт, который продаёт',c5:'и не требует переделок',s1:'шаблоны',s2:'конструкторы',s3:'посредники',only1:'Только',only2:'я и ваш проект.',
 aboutP1:'Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.',
 aboutP2:'Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.',
 v1t:'Дизайн с нуля',v1d:'Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.',
@@ -384,7 +409,7 @@ stay:'Остаёмся на связи',footRole:'UX/UI-дизайн · сайт
 en:{navAbout:'About',navProcess:'Process',navPricing:'Pricing',navContact:'Contact',cta:'Get in touch',how:'How I work ↓',
 kicker:'UX/UI · Design · Development · Promotion',h1a:'A website',h1b:'that sells',h1c:'and sticks.',
 heroSub:'Design, development and promotion, turnkey — from idea to a finished website.',motto:'Think. Create. Improve.',
-aboutLabel:'About',aboutTitle:'One person — the whole project, from idea to launch',
+aboutLabel:'About',aT1:'One person —',aT2:'the whole project,',aT3:'from idea to launch.',p1a:'I am an independent UX/UI designer. I take a project from idea to a finished website —',p1m:'no middlemen',p1b:', you work directly with the person doing it.',c0:'I take on few projects and do them well:',c1:'Meaning & structure',c2:'Design',c3:'Code',c4:'A website that sells',c5:'and needs no rework',s1:'templates',s2:'site builders',s3:'middlemen',only1:'Just',only2:'me and your project.',
 aboutP1:'I am an independent UX/UI designer. I take a project from idea to a finished website — no middlemen, you work directly with the person doing it.',
 aboutP2:'I take on few projects and do them well: meaning and structure first, then design, then code. The result is a website that sells and needs no rework.',
 v1t:'Design from scratch',v1d:'No templates or site builders: every project is drawn for your goals and your audience.',
@@ -425,7 +450,7 @@ let mm=null,first=true;
 function build(){
   if(!anim)return;
   mm=gsap.matchMedia();
-  mm.add({desk:'(min-width: 900px)',fine:'(pointer: fine)'},ctx=>{
+  mm.add({all:'all',desk:'(min-width: 900px)',fine:'(pointer: fine)'},ctx=>{
     const {desk,fine}=ctx.conditions,off=[()=>{$('#pre').hidden=true;}];
     if(first){
       first=false;
@@ -440,6 +465,12 @@ function build(){
         .from('.win',{y:160,opacity:0,rotate:i=>[-20,18,-12][i],duration:1.3,ease:'expo.out',stagger:.1},'<')
         .from('.ring',{scale:.6,opacity:0,duration:1.6,ease:'power3.out',stagger:.15},'<');
     }
+    /* reading progress + nav hides on the way down, returns on the way up */
+    const prog=$('#prog');prog.style.display='block';
+    gsap.fromTo(prog,{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
+    const navShow=v=>gsap.to('#nav',{yPercent:v?0:-170,duration:.45,ease:'power3.out',overwrite:'auto'});
+    ScrollTrigger.create({start:240,end:'max',onUpdate:s=>{if($('#menu').hidden)navShow(s.direction<0);},onLeaveBack:()=>navShow(true)});
+    off.push(()=>{prog.style.display='';gsap.set('#nav',{clearProps:'transform'});});
     /* hero parallax */
     gsap.to('.wins',{yPercent:-18,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
     gsap.to('.r1',{yPercent:30,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
@@ -464,13 +495,20 @@ function build(){
     /* about */
     const at=SplitText.create('#aboutTitle',{type:'words'});
     gsap.fromTo(at.words,{opacity:.15},{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:'#aboutTitle',start:'top 85%',end:'bottom 45%',scrub:true}});
-    gsap.from('.val',{y:90,opacity:0,duration:1.1,ease:'expo.out',stagger:.12,scrollTrigger:{trigger:'#vals',start:'top 82%',once:true}});
+    gsap.from('.val',{y:60,opacity:0,duration:1.1,ease:'expo.out',stagger:.12,scrollTrigger:{trigger:'#vals',start:'top 85%',once:true}});
+    /* strike-through: templates, builders, middlemen -> only me and your project */
+    const sk2=gsap.timeline({scrollTrigger:{trigger:'#strike',start:'top 82%',end:'top 38%',scrub:true}});
+    $$('#strike .st').forEach(st=>{sk2.from(st.querySelector('i'),{scaleX:0,ease:'power2.inOut',duration:1}).fromTo(st,{color:'#F2F0EB'},{color:'#6E6C66',duration:.6},'<.4');});
+    sk2.from('#only',{yPercent:60,opacity:0,ease:'power3.out',duration:1.2},'+=.1');
+    /* about stays, process slides up over it */
+    gsap.timeline({scrollTrigger:{trigger:'#about',start:'bottom bottom',end:'+=100%',pin:true,pinSpacing:false,scrub:true}})
+      .to('#about',{scale:.93,opacity:.35,ease:'none'});
     $$('.sec-t,.c-t').forEach(t=>{const s=SplitText.create(t,{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:110,duration:1.1,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:t,start:'top 88%',once:true}});});
     $$('[data-rv]').forEach(el=>gsap.from(el,{y:50,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
     /* process */
     const steps=$$('.step');
     if(desk){
-      const tl=gsap.timeline({scrollTrigger:{trigger:'#process',start:'top top',end:'+=1500',pin:true,scrub:.6}});
+      const tl=gsap.timeline({scrollTrigger:{trigger:'#process',start:'top top',end:'+=1200',pin:true,scrub:1,snap:{snapTo:.25,duration:{min:.3,max:.7},delay:.08,ease:'power2.inOut'}}});
       tl.fromTo('#fill',{scaleX:0},{scaleX:1,ease:'none',duration:4},0);
       steps.forEach((s,i)=>tl.fromTo(s,{opacity:.2,y:24},{opacity:1,y:0,duration:.6,ease:'power2.out'},i*1));
     }else{
@@ -487,11 +525,12 @@ function build(){
   });
 }
 
+const EASE=t=>Math.min(1,1.001-Math.pow(2,-10*t));
 let lenis=null;
 if(anim){gsap.registerPlugin(ScrollTrigger,SplitText);ScrollTrigger.config({ignoreMobileResize:true});
-  if(window.Lenis){try{lenis=new Lenis({lerp:.1,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}catch(e){lenis=null;}}
+  if(window.Lenis){try{lenis=new Lenis({duration:1.15,easing:EASE,smoothWheel:true,wheelMultiplier:.9,touchMultiplier:1.4});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}catch(e){lenis=null;}}
 }
-$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(!t)return;e.preventDefault();closeMenu();if(lenis)lenis.scrollTo(t,{duration:1.4,offset:-72});else{const y=t.getBoundingClientRect().top+scrollY-72;scrollTo({top:y,behavior:reduce?'auto':'smooth'});}}));
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(!t)return;e.preventDefault();closeMenu();if(lenis){const d=Math.abs(t.getBoundingClientRect().top);lenis.scrollTo(t,{offset:-72,duration:Math.min(2.2,Math.max(1,d/2600)),easing:EASE});}else{const y=t.getBoundingClientRect().top+scrollY-72;scrollTo({top:y,behavior:reduce?'auto':'smooth'});}}));
 
 function setLang(l){
   if(l===lang)return;lang=l;try{localStorage.setItem('ws-lang',l);}catch(e){}
@@ -534,7 +573,8 @@ $$('.copy').forEach(b=>b.addEventListener('click',()=>{
 }));
 
 apply(lang);
-(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{build();if(anim)ScrollTrigger.refresh();});
+const fontsReady=document.fonts?Promise.race([Promise.all(['500 1em Unbounded','700 1em Unbounded','800 1em Unbounded','400 1em Manrope'].map(f=>document.fonts.load(f))).then(()=>document.fonts.ready),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
+fontsReady.catch(()=>{}).then(()=>{build();if(anim)ScrollTrigger.refresh();});
 })();
 </script>
 
