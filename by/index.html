@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Независимый UX/UI-дизайнер. Дизайн, разработка и продвижение сайтов под ключ — от идеи до готового сайта.">
+<meta name="theme-color" content="#0A0A0B">
+<meta property="og:title" content="Websssites — сайты под ключ">
+<meta property="og:description" content="Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0A0B'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23D4FF3A'/%3E%3C/svg%3E">
+<title>Websssites — сайты под ключ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: dark stage, one lime accent, a light "paper" act for process and pricing. Single committed dark look. */
+:root{
+  --bg:#0A0A0B; --bg-2:#121214; --line:#1E1E21; --line-2:#3A3A3F;
+  --fg:#F2F0EB; --mute:#A9A79F; --lime:#D4FF3A;
+  --paper:#F2F0EB; --paper-line:#D3D1C9; --paper-mute:#4A4843;
+  --f-d:'Unbounded','Arial Black',system-ui,sans-serif;
+  --f-b:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --gl:max(16px,4vw,env(safe-area-inset-left,0px)); --gr:max(16px,4vw,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-b);font-size:17px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+.wrap{padding-left:var(--gl);padding-right:var(--gr)}
+h1,h2,h3,p{margin:0}
+.d{font-family:var(--f-d);letter-spacing:-.045em;line-height:1;font-kerning:none}
+.label{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--lime)}
+.paper .label{color:#5C5A54}
+
+/* preloader */
+#pre{position:fixed;inset:0;z-index:100;background:var(--lime);color:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:4vw;font-family:var(--f-d);font-weight:800}
+#pre b{font-size:clamp(80px,18vw,260px);line-height:.8;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+#pre span{font-size:14px;font-weight:500}
+
+/* nav */
+.nav{position:fixed;z-index:50;top:calc(12px + env(safe-area-inset-top,0px));left:var(--gl);right:var(--gr);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 20px;border-radius:999px;background:rgba(18,18,20,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-d);font-weight:700;font-size:16px;letter-spacing:-.02em}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.links{display:flex;gap:28px;font-size:15px;font-weight:500}
+.links a{text-decoration:none;color:var(--mute);transition:color .2s}
+.links a:hover{color:var(--fg)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.seg{display:flex;padding:3px;border:1px solid var(--line-2);border-radius:999px}
+.seg button{height:42px;min-width:44px;border:0;border-radius:999px;background:transparent;color:var(--mute);font:700 12px var(--f-d);cursor:pointer;transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--lime);color:var(--bg)}
+.pill{height:44px;padding:0 20px;display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap;border:0;cursor:pointer;transition:background .2s}
+.pill:hover{background:var(--lime)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;align-items:center;justify-content:center}
+.burger span{display:block;width:16px;height:1.5px;background:currentColor;position:relative;transition:transform .3s,background .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:currentColor;transition:transform .3s}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(5px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-5px) rotate(-45deg)}
+#menu{position:fixed;inset:0;z-index:45;background:var(--bg);padding:calc(110px + env(safe-area-inset-top,0px)) var(--gr) calc(32px + env(safe-area-inset-bottom,0px)) var(--gl);display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+#menu nav{display:flex;flex-direction:column}
+#menu nav a{font-family:var(--f-d);font-weight:700;font-size:clamp(34px,10vw,56px);letter-spacing:-.04em;line-height:1;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none}
+#menu nav a:active{color:var(--lime)}
+#menu .btn{width:100%;justify-content:center}
+@media (max-width:900px){.links{display:none}.burger{display:inline-flex}}
+@media (max-width:480px){.nav .pill{display:none}}
+
+/* hero */
+.hero{position:relative;padding-block:calc(120px + env(safe-area-inset-top,0px)) 96px;display:flex;flex-direction:column;gap:56px;overflow:hidden}
+.ring{position:absolute;border-radius:50%;border:1px solid var(--line);pointer-events:none}
+.r1{right:-10vw;top:-8vw;width:46vw;height:46vw}.r2{right:-2vw;top:0;width:30vw;height:30vw}
+.kicker{position:relative;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-weight:600}
+#h1{position:relative;font-weight:700;font-size:clamp(40px,7.6vw,118px);line-height:.98}
+.mask{display:block;overflow:clip;padding-bottom:.06em}
+.l{display:block}
+.l-lime{display:flex;align-items:center;gap:.25em;flex-wrap:wrap;color:var(--lime)}
+.arrow-pill{display:inline-flex;align-items:center;justify-content:center;width:1.6em;height:.8em;border-radius:999px;background:var(--lime);color:var(--bg)}
+.arrow-pill svg{width:.45em;height:.45em}
+.hero-b{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:48px}
+.hero-txt{flex:1 1 340px;max-width:460px;display:flex;flex-direction:column;gap:28px}
+.hero-txt p{font-size:19px;line-height:1.55;color:#C9C7C0}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{height:56px;padding:0 30px;display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:var(--lime);color:var(--bg);text-decoration:none;font-weight:700;font-size:16px;border:0;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--fg)}
+.btn-o{background:transparent;color:var(--fg);border:1px solid var(--line-2);font-weight:600}
+.btn-o:hover{background:transparent;border-color:var(--fg)}
+.mag{display:inline-block}
+.wins{flex:1 1 480px;max-width:640px;height:340px;position:relative;min-width:0}
+.win{position:absolute;border-radius:18px;overflow:hidden}
+.w1{left:0;top:50px;width:58%;height:250px;background:#151517;border:1px solid #2A2A2E;rotate:-7deg;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.w2{right:4%;top:0;width:52%;height:270px;background:var(--paper);rotate:5deg;box-shadow:0 40px 80px rgba(0,0,0,.55)}
+.w3{left:44%;bottom:-10px;width:120px;height:230px;border-radius:24px;background:var(--bg);border:6px solid #2A2A2E;rotate:-2deg;box-shadow:0 30px 60px rgba(0,0,0,.6);padding:14px 10px;display:flex;flex-direction:column;gap:8px}
+.wb{height:30px;display:flex;align-items:center;gap:6px;padding:0 14px;border-bottom:1px solid #222225}
+.wb i{width:8px;height:8px;border-radius:50%;background:#3A3A3F}
+.w2 .wb{border-color:#DDDBD4}.w2 .wb i{background:#C5C3BC}
+.wc{padding:16px;display:flex;flex-direction:column;gap:10px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.bx{border-radius:8px}
+@media (max-width:700px){
+  .wins{height:250px;flex-basis:100%}
+  .w1{width:62%;height:200px;top:40px}.w2{width:58%;height:210px}.w3{width:96px;height:184px;left:42%}
+  .hero{padding-block:calc(104px + env(safe-area-inset-top,0px)) 64px;gap:40px}
+  .hero-b{gap:40px}
+  .btns .btn,.btns .mag{flex:1 1 auto}.btns .mag .btn{width:100%;justify-content:center}.btn-o{justify-content:center}
+  .about{gap:48px}.about-p{padding-top:0}
+  .val{min-height:0;gap:32px;padding:28px 24px}
+  .plan{min-height:0;padding:28px 24px}.plan h3{margin-top:8px}
+  .note{padding:22px}.note .pill{width:100%;justify-content:center}
+  .process{border-radius:28px 28px 0 0}
+  .steps{gap:40px}
+  form{border-radius:24px}
+  .foot-t .btns{width:100%}.out{flex:1;justify-content:center}
+  .mq{padding:16px 0}
+}
+
+/* marquee */
+.mq{background:var(--lime);color:var(--bg);padding:22px 0;overflow:hidden}
+.mq-in{display:flex;width:max-content;gap:48px;animation:mq 22s linear infinite;font-family:var(--f-d);font-weight:700;font-size:clamp(22px,2.6vw,34px);letter-spacing:-.03em;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* about */
+.about{position:relative;z-index:1;padding-block:clamp(96px,12vw,170px) clamp(110px,12vw,180px);display:flex;flex-direction:column;gap:clamp(56px,7vw,96px);transform-origin:50% 0}
+.ab-head{display:flex;flex-direction:column;gap:28px}
+#aboutTitle{font-weight:600;font-size:clamp(36px,6vw,96px);line-height:1.02;letter-spacing:-.045em;max-width:13ch;text-wrap:balance}
+#aboutTitle .hl{color:var(--lime)}
+.ab-lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 6vw;align-items:start}
+.ab-lead .big{grid-column:2;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:var(--fg);max-width:34ch}
+.ab-lead .small{grid-column:2;font-size:16px;color:var(--mute);max-width:44ch}
+.vals{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.val{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:16px 4vw;align-items:baseline;padding:clamp(26px,3vw,40px) 0;border-top:1px solid var(--line);cursor:default}
+.val-n{font-family:var(--f-d);font-size:14px;font-weight:500;color:var(--lime)}
+.val h3{font-family:var(--f-d);font-weight:600;font-size:clamp(24px,2.6vw,40px);letter-spacing:-.035em;line-height:1.05;transition:transform .5s cubic-bezier(.2,.8,.2,1),color .3s}
+.val p{font-size:16px;color:var(--mute);max-width:40ch}
+@media (hover:hover){.val:hover h3{transform:translateX(14px);color:var(--lime)}}
+@media (max-width:760px){
+  .ab-lead{grid-template-columns:1fr}.ab-lead .big,.ab-lead .small{grid-column:1}
+  .val{grid-template-columns:40px minmax(0,1fr)}.val p{grid-column:2}
+}
+.strike{grid-column:2;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,22px)}
+.st-row{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--f-d);font-weight:500;font-size:clamp(22px,2.3vw,36px);letter-spacing:-.035em;line-height:1.15;color:#6E6C66}
+.st{position:relative;display:inline-block}
+.st i{position:absolute;left:-3%;right:-3%;top:54%;height:.11em;border-radius:99px;background:var(--lime);transform-origin:left center}
+.only{font-family:var(--f-d);font-weight:700;font-size:clamp(30px,3.6vw,56px);letter-spacing:-.045em;line-height:1.02;color:var(--fg)}
+.only .hl{color:var(--lime)}
+.ab-text{grid-column:2;display:flex;flex-direction:column;gap:14px;max-width:46ch;font-size:16px;color:var(--mute)}
+@media (max-width:760px){.strike,.ab-text{grid-column:1}}
+.process{position:relative;z-index:2;box-shadow:0 -30px 80px rgba(0,0,0,.45)}
+
+/* paper act */
+.paper{background:var(--paper);color:var(--bg)}
+.process{border-radius:40px 40px 0 0}
+.p-in{padding-block:clamp(80px,9vw,120px);display:flex;flex-direction:column;justify-content:center;gap:64px}
+@media (min-width:900px){.p-in{min-height:100svh}}
+.sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.sec-h>div{display:flex;flex-direction:column;gap:24px}
+.sec-t{font-weight:700;font-size:clamp(38px,6vw,92px)}
+.sec-h>p{max-width:340px;font-size:16px;color:var(--paper-mute)}
+.tl{height:2px;background:var(--paper-line);position:relative;margin-bottom:40px}
+#fill{position:absolute;inset:0;background:var(--bg);transform-origin:left}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:32px}
+.step{display:flex;flex-direction:column;gap:18px}
+.step b{font-family:var(--f-d);font-weight:800;font-size:clamp(64px,6vw,88px);line-height:.9;letter-spacing:-.06em}
+.step h3{font-family:var(--f-d);font-weight:600;font-size:21px;letter-spacing:-.02em;line-height:1.2}
+.step p{font-size:16px;color:var(--paper-mute)}
+.pricing{padding-block:clamp(90px,10vw,140px);border-top:1px solid var(--paper-line);display:flex;flex-direction:column;gap:56px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.plan{position:relative;overflow:hidden;padding:32px 28px;min-height:420px;border-radius:28px;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;gap:18px;text-decoration:none;cursor:pointer;transition:color .35s}
+.plan::before{content:"";position:absolute;inset:0;background:var(--lime);transform:scaleY(0);transform-origin:bottom;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.plan>*{position:relative}
+.plan-t{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-d);font-size:13px;color:var(--mute);transition:color .35s}
+.arr{width:48px;height:48px;border-radius:50%;background:var(--lime);color:var(--bg);display:inline-flex;align-items:center;justify-content:center;transition:transform .4s,background .35s,color .35s}
+.plan h3{margin-top:24px;font-family:var(--f-d);font-weight:600;font-size:25px;line-height:1.1;letter-spacing:-.025em}
+.plan p{font-size:15px;color:var(--mute);transition:color .35s}
+.cost{margin-top:auto;padding-top:24px;border-top:1px solid #26262A;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;transition:border-color .35s}
+.cost small{font-size:15px;color:var(--mute);transition:color .35s}
+.cost strong{font-family:var(--f-d);font-weight:700;font-size:32px;letter-spacing:-.04em;color:var(--lime);font-variant-numeric:tabular-nums;transition:color .35s}
+@media (hover:hover){
+  .plan:hover{color:var(--bg)}.plan:hover::before{transform:scaleY(1)}
+  .plan:hover p,.plan:hover small,.plan:hover .plan-t{color:#2B2B26}.plan:hover strong{color:var(--bg)}
+  .plan:hover .cost{border-color:rgba(10,10,11,.25)}.plan:hover .arr{transform:rotate(45deg);background:var(--bg);color:var(--lime)}
+}
+.note{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;padding:28px 32px;border-radius:24px;border:1px dashed #8A8880}
+.note p{font-size:18px;line-height:1.5;max-width:640px}
+.pill-d{background:var(--bg);color:var(--fg)}.pill-d:hover{background:#2B2B26}
+
+/* contact */
+.contact{padding-block:clamp(90px,10vw,140px) clamp(80px,9vw,120px);display:flex;flex-wrap:wrap;gap:56px 80px}
+.c-l{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.c-t{font-weight:700;font-size:clamp(38px,5.6vw,84px)}
+.c-l>p{max-width:460px;font-size:18px;color:var(--mute)}
+.direct{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.direct small{font-size:14px;color:var(--mute)}
+.drow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.drow span,.drow a.big{font-family:var(--f-d);font-size:clamp(18px,1.8vw,24px);font-weight:500;letter-spacing:-.02em;text-decoration:none;user-select:all}
+.drow a.big:hover{color:var(--lime)}
+.copy{height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--fg);font:600 13px var(--f-b);cursor:pointer;transition:border-color .2s,color .2s}
+.copy:hover{border-color:var(--lime);color:var(--lime)}
+form{position:relative;flex:1 1 440px;min-width:0;padding:clamp(24px,3vw,40px);border-radius:32px;background:var(--bg-2);border:1px solid var(--line);display:flex;flex-direction:column;gap:28px}
+.fl{position:relative;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--mute)}
+.fl input{height:52px;background:transparent;border:0;border-bottom:1px solid var(--line-2);color:var(--fg);font:400 18px var(--f-b);outline:none;border-radius:0}
+.fl::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.fl:focus-within::after{transform:scaleX(1)}
+fieldset{border:0;margin:0;padding:0}
+legend{font-size:14px;color:var(--mute);padding:0;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--fg);font:600 15px var(--f-b);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--fg)}
+.chip[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--bg)}
+.send:disabled{opacity:.6;cursor:wait}
+.send{height:60px;justify-content:center;font-family:var(--f-d);width:100%}
+.status{min-height:1.6em;font-size:15px;color:var(--lime)}
+
+/* footer */
+.foot{padding-block:72px 40px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:56px}
+.foot-t{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+.foot-t p{font-family:var(--f-d);font-size:22px;font-weight:500;letter-spacing:-.02em}
+.out{height:48px;padding:0 22px;display:inline-flex;align-items:center;border-radius:999px;border:1px solid var(--line-2);text-decoration:none;font-weight:600;transition:border-color .2s,color .2s}
+.out:hover{border-color:var(--lime);color:var(--lime)}
+#motto{font-weight:800;font-size:clamp(36px,8.6vw,140px);line-height:.98;letter-spacing:-.055em}
+.foot-b{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--mute)}
+
+#prog{display:none;position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:var(--lime);transform-origin:left;transform:scaleX(0)}
+section[id]{scroll-margin-top:84px}
+#cur{position:fixed;left:0;top:0;z-index:90;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--lime);mix-blend-mode:difference;pointer-events:none;opacity:0}
+@media (pointer:coarse){#cur{display:none}}
+.val.on h3{transform:translateX(14px);color:var(--lime)}
+.plan.on{color:var(--bg)}.plan.on::before{transform:scaleY(1)}
+.plan.on p,.plan.on small,.plan.on .plan-t{color:#2B2B26}.plan.on strong{color:var(--bg)}
+.plan.on .cost{border-color:rgba(10,10,11,.25)}.plan.on .arr{transform:rotate(45deg);background:var(--bg);color:var(--lime)}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+
+<div id="pre" hidden aria-hidden="true"><span>websssites</span><b id="preN">0</b></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#hero"><i></i>websssites</a>
+  <nav class="links" aria-label="Main">
+    <a href="#about" data-k="navAbout">Обо мне</a><a href="#process" data-k="navProcess">Процесс</a><a href="#pricing" data-k="navPricing">Цены</a><a href="#contact" data-k="navContact">Контакты</a>
+  </nav>
+  <div class="nav-r">
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Меню"><span></span></button>
+    <div class="seg" role="group" aria-label="Language"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+    <a class="pill" href="#contact" data-k="cta">Оставить заявку</a>
+  </div>
+</header>
+
+<div id="menu" hidden>
+  <nav aria-label="Mobile">
+    <a href="#about" data-k="navAbout">Обо мне</a><a href="#process" data-k="navProcess">Процесс</a><a href="#pricing" data-k="navPricing">Цены</a><a href="#contact" data-k="navContact">Контакты</a>
+  </nav>
+  <a class="btn" href="#contact" data-k="cta">Оставить заявку</a>
+</div>
+
+<main id="main">
+<section class="hero wrap" id="hero">
+  <i class="ring r1" aria-hidden="true"></i><i class="ring r2" aria-hidden="true"></i>
+  <p class="kicker" data-k="kicker">UX/UI · Дизайн · Разработка · Продвижение</p>
+  <h1 class="d" id="h1">
+    <span class="mask"><span class="l" data-k="h1a">Сайт, который</span></span>
+    <span class="mask"><span class="l l-lime"><span data-k="h1b">продаёт</span><span class="arrow-pill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></span></span>
+    <span class="mask"><span class="l" data-k="h1c">и запоминается.</span></span>
+  </h1>
+  <div class="hero-b">
+    <div class="hero-txt">
+      <p data-k="heroSub">Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.</p>
+      <div class="btns">
+        <span class="mag"><a class="btn" href="#contact"><span data-k="cta">Оставить заявку</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></span>
+        <a class="btn btn-o" href="#process" data-k="how">Как я работаю ↓</a>
+      </div>
+    </div>
+    <div class="wins" aria-hidden="true">
+      <div class="win w1" data-d="18"><div class="wb"><i></i><i></i><i></i></div><div class="wc"><div class="bx" style="width:70%;height:16px;background:#2E2E33"></div><div class="bx" style="width:45%;height:16px;background:#2E2E33"></div><div style="width:90px;height:26px;border-radius:999px;background:#D4FF3A;margin-top:6px"></div><div class="g3"><div class="bx" style="height:60px;background:#1F1F23"></div><div class="bx" style="height:60px;background:#1F1F23"></div><div class="bx" style="height:60px;background:#1F1F23"></div></div></div></div>
+      <div class="win w2" data-d="-26"><div class="wb"><i></i><i></i><i></i></div><div class="wc"><div class="g2"><div class="bx" style="height:90px;background:#0A0A0B"></div><div class="bx" style="height:90px;background:#D9D7CF"></div><div class="bx" style="height:14px;background:#BDBBB3"></div><div class="bx" style="height:14px;background:#BDBBB3"></div><div class="bx" style="height:70px;background:#D9D7CF"></div><div class="bx" style="height:70px;background:#D4FF3A"></div></div></div></div>
+      <div class="win w3" data-d="40"><div class="bx" style="width:60%;height:10px;background:#D4FF3A"></div><div class="bx" style="height:70px;background:#1F1F23"></div><div class="bx" style="width:80%;height:8px;background:#2E2E33"></div><div class="bx" style="width:55%;height:8px;background:#2E2E33"></div><div style="margin-top:auto;height:26px;border-radius:999px;background:#F2F0EB"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-in" id="mq">
+  <span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span><span data-k="motto">Думаю. Создаю. Улучшаю.</span><span>✳</span>
+</div></div>
+
+<section class="about wrap" id="about">
+  <div class="ab-head">
+    <p class="label" data-k="aboutLabel">Обо мне</p>
+    <h2 class="d" id="aboutTitle"><span data-k="aT1">Один человек —</span> <span class="hl" data-k="aT2">весь проект</span> <span data-k="aT3">от идеи до запуска.</span></h2>
+  </div>
+  <div class="ab-lead">
+    <div class="strike" id="strike">
+      <p class="st-row" aria-hidden="true"><span class="st"><span data-k="s3">посредники</span><i></i></span></p>
+      <p class="only" id="only"><span data-k="only1">Только</span> <span class="hl" data-k="only2">я и ваш проект.</span></p>
+    </div>
+    <div class="ab-text">
+      <p data-rv data-k="aboutP1">Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.</p>
+      <p data-rv data-k="aboutP2">Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.</p>
+    </div>
+  </div>
+  <ol class="vals" id="vals">
+    <li class="val"><span class="val-n">01</span><h3 data-k="v1t">Дизайн с нуля</h3><p data-k="v1d">Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.</p></li>
+    <li class="val"><span class="val-n">02</span><h3 data-k="v2t">Смысл прежде формы</h3><p data-k="v2d">Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.</p></li>
+    <li class="val"><span class="val-n">03</span><h3 data-k="v3t">До запуска и дальше</h3><p data-k="v3d">Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.</p></li>
+  </ol>
+</section>
+
+<section class="paper process" id="process">
+  <div class="p-in wrap">
+    <div class="sec-h">
+      <div><p class="label" data-k="procLabel">Процесс</p><h2 class="d sec-t" data-k="procTitle">Как я работаю</h2></div>
+      <p data-k="procHint">Четыре шага — и у вас готовый сайт, который приводит клиентов.</p>
+    </div>
+    <div>
+      <div class="tl" aria-hidden="true"><div id="fill"></div></div>
+      <ol class="steps">
+        <li class="step"><b>01</b><h3 data-k="s1t">Брифинг</h3><p data-k="s1d">Разбираем задачу, цели и аудиторию. Вы получаете понятный план и точную оценку.</p></li>
+        <li class="step"><b>02</b><h3 data-k="s2t">Прототип и дизайн</h3><p data-k="s2d">Структура и UX/UI. Вы видите, как сайт будет выглядеть, ещё до разработки.</p></li>
+        <li class="step"><b>03</b><h3 data-k="s3t">Разработка</h3><p data-k="s3d">Вёрстка, адаптив, анимация. Сайт быстро загружается и корректно работает на всех устройствах.</p></li>
+        <li class="step"><b>04</b><h3 data-k="s4t">Запуск и продвижение</h3><p data-k="s4d">Публикация, базовая SEO-настройка, первые заявки и сопровождение.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="paper" id="pricing">
+  <div class="pricing wrap">
+    <div class="sec-h"><div><p class="label" data-k="priceLabel">Цены</p><h2 class="d sec-t" data-k="priceTitle">Услуги и цены</h2></div></div>
+    <div class="plans" id="plans">
+      <a class="plan" href="#contact" data-svc="0"><div class="plan-t"><span>01</span><span class="arr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></div><h3 data-k="p1t">Сайт-визитка</h3><p data-k="p1d">Точечное цифровое представительство. Формирует первое впечатление и аккуратно закрывает базовые вопросы клиента.</p><div class="cost"><small data-k="from">от</small><strong data-price="50">50 BYN</strong></div></a>
+      <a class="plan" href="#contact" data-svc="1"><div class="plan-t"><span>02</span><span class="arr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></div><h3 data-k="p2t">Landing Page</h3><p data-k="p2d">Промо-страница с акцентом на один продукт или услугу. Выверенная смысловая структура и фокусировка внимания.</p><div class="cost"><small data-k="from">от</small><strong data-price="100">100 BYN</strong></div></a>
+      <a class="plan" href="#contact" data-svc="2"><div class="plan-t"><span>03</span><span class="arr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></div><h3 data-k="p3t">Корпоративный сайт</h3><p data-k="p3d">Многостраничная система для репрезентации бизнеса, каталога решений и демонстрации масштаба компании.</p><div class="cost"><small data-k="from">от</small><strong data-price="500">500 BYN</strong></div></a>
+      <a class="plan" href="#contact" data-svc="3"><div class="plan-t"><span>04</span><span class="arr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></div><h3 data-k="p4t">E-Commerce</h3><p data-k="p4d">Полнофункциональный цифровой магазин: каталог, гибкие фильтры, автономная корзина и интеграция эквайринга.</p><div class="cost"><small data-k="from">от</small><strong data-price="1000">1 000 BYN</strong></div></a>
+    </div>
+    <div class="note" data-rv><p data-k="priceNote">Точную стоимость назову после брифинга — он бесплатный и ни к чему не обязывает.</p><a class="pill pill-d" href="#contact" data-k="brief">Записаться на бриф</a></div>
+  </div>
+</section>
+
+<section class="contact wrap" id="contact">
+  <div class="c-l">
+    <p class="label" data-k="contLabel">Контакты</p>
+    <h2 class="d c-t" data-k="contTitle">Оставить заявку</h2>
+    <p data-rv data-k="contText">Если вы хотите себе современный сайт с продвижением — заполните заявку, и я с вами свяжусь.</p>
+    <div class="direct" data-rv>
+      <small data-k="direct">Или напишите напрямую:</small>
+      <div class="drow"><span>websssites@gmail.com</span><button class="copy" type="button" data-copy="websssites@gmail.com" data-k="copy">Копировать</button></div>
+      <div class="drow"><a class="big" href="https://t.me/Vadia328">Telegram · @Vadia328 ↗</a></div>
+    </div>
+  </div>
+  <form id="form" novalidate data-rv>
+    <label class="fl" for="f-name"><span data-k="fName">Имя</span><input id="f-name" name="name" type="text" autocomplete="name"></label>
+    <label class="fl" for="f-contact"><span data-k="fContact">Email или Telegram</span><input id="f-contact" name="contact" type="text" autocomplete="email"></label>
+    <fieldset><legend data-k="fService">Услуга</legend><div class="chips">
+      <button type="button" class="chip" aria-pressed="false" data-k="p1t">Сайт-визитка</button>
+      <button type="button" class="chip" aria-pressed="true" data-k="p2t">Landing Page</button>
+      <button type="button" class="chip" aria-pressed="false" data-k="p3t">Корпоративный сайт</button>
+      <button type="button" class="chip" aria-pressed="false" data-k="p4t">E-Commerce</button>
+    </div></fieldset>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn send" type="submit" data-k="send">Отправить заявку</button>
+    <p class="status" id="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<footer class="foot wrap">
+  <div class="foot-t"><p data-k="stay">Остаёмся на связи</p><div class="btns"><a class="out" href="https://t.me/Vadia328">Telegram</a><a class="out" href="#contact">Email</a></div></div>
+  <p class="d" id="motto" data-k="motto">Думаю. Создаю. Улучшаю.</p>
+  <div class="foot-b"><span>© 2026 websssites</span><span data-k="footRole">UX/UI-дизайн · сайты под ключ</span></div>
+</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script>
+(function(){
+const D={
+ru:{navAbout:'Обо мне',navProcess:'Процесс',navPricing:'Цены',navContact:'Контакты',cta:'Оставить заявку',how:'Как я работаю ↓',
+kicker:'UX/UI · Дизайн · Разработка · Продвижение',h1a:'Сайт, который',h1b:'продаёт',h1c:'и запоминается.',
+heroSub:'Дизайн, разработка и продвижение под ключ — от идеи до готового сайта.',motto:'Думаю. Создаю. Улучшаю.',
+aboutLabel:'Обо мне',aT1:'Один человек —',aT2:'весь проект',aT3:'от идеи до запуска.',p1a:'Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта —',p1m:'без посредников',p1b:', напрямую с тем, кто делает.',c0:'Беру мало проектов и делаю их качественно:',c1:'Смысл и структура',c2:'Дизайн',c3:'Код',c4:'Сайт, который продаёт',c5:'и не требует переделок',s1:'шаблоны',s2:'конструкторы',s3:'посредники',only1:'Только',only2:'я и ваш проект.',
+aboutP1:'Я — независимый UX/UI-дизайнер. Довожу проект от идеи до готового сайта — без посредников, напрямую с тем, кто делает.',
+aboutP2:'Беру мало проектов и делаю их качественно: сначала смысл и структура, потом дизайн, потом код. Результат — сайт, который продаёт и не требует переделок.',
+v1t:'Дизайн с нуля',v1d:'Без шаблонов и конструкторов: каждый проект рисуется под вашу задачу и аудиторию.',
+v2t:'Смысл прежде формы',v2d:'Сначала логика и сценарий пользователя, потом визуал. Красиво — значит удобно.',
+v3t:'До запуска и дальше',v3d:'Не бросаю на макете: вёрстка, адаптив, продвижение и поддержка после запуска.',
+procLabel:'Процесс',procTitle:'Как я работаю',procHint:'Четыре шага — и у вас готовый сайт, который приводит клиентов.',
+s1t:'Брифинг',s1d:'Разбираем задачу, цели и аудиторию. Вы получаете понятный план и точную оценку.',
+s2t:'Прототип и дизайн',s2d:'Структура и UX/UI. Вы видите, как сайт будет выглядеть, ещё до разработки.',
+s3t:'Разработка',s3d:'Вёрстка, адаптив, анимация. Сайт быстро загружается и корректно работает на всех устройствах.',
+s4t:'Запуск и продвижение',s4d:'Публикация, базовая SEO-настройка, первые заявки и сопровождение.',
+priceLabel:'Цены',priceTitle:'Услуги и цены',from:'от',
+p1t:'Сайт-визитка',p1d:'Точечное цифровое представительство. Формирует первое впечатление и аккуратно закрывает базовые вопросы клиента.',
+p2t:'Landing Page',p2d:'Промо-страница с акцентом на один продукт или услугу. Выверенная смысловая структура и фокусировка внимания.',
+p3t:'Корпоративный сайт',p3d:'Многостраничная система для репрезентации бизнеса, каталога решений и демонстрации масштаба компании.',
+p4t:'E-Commerce',p4d:'Полнофункциональный цифровой магазин: каталог, гибкие фильтры, автономная корзина и интеграция эквайринга.',
+priceNote:'Точную стоимость назову после брифинга — он бесплатный и ни к чему не обязывает.',brief:'Записаться на бриф',
+contLabel:'Контакты',contTitle:'Оставить заявку',contText:'Если вы хотите себе современный сайт с продвижением — заполните заявку, и я с вами свяжусь.',
+direct:'Или напишите напрямую:',copy:'Копировать',copied:'Скопировано',fName:'Имя',fContact:'Email или Telegram',fService:'Услуга',send:'Отправить заявку',
+sent:'Спасибо! Заявка отправлена — я свяжусь с вами в ближайшее время.',sending:'Отправляю…',fail:'Не получилось отправить. Напишите мне на websssites@gmail.com или в Telegram.',err:'Укажите имя и контакт, чтобы я мог ответить.',
+stay:'Остаёмся на связи',footRole:'UX/UI-дизайн · сайты под ключ'},
+en:{navAbout:'About',navProcess:'Process',navPricing:'Pricing',navContact:'Contact',cta:'Get in touch',how:'How I work ↓',
+kicker:'UX/UI · Design · Development · Promotion',h1a:'A website',h1b:'that sells',h1c:'and sticks.',
+heroSub:'Design, development and promotion, turnkey — from idea to a finished website.',motto:'Think. Create. Improve.',
+aboutLabel:'About',aT1:'One person —',aT2:'the whole project,',aT3:'from idea to launch.',p1a:'I am an independent UX/UI designer. I take a project from idea to a finished website —',p1m:'no middlemen',p1b:', you work directly with the person doing it.',c0:'I take on few projects and do them well:',c1:'Meaning & structure',c2:'Design',c3:'Code',c4:'A website that sells',c5:'and needs no rework',s1:'templates',s2:'site builders',s3:'middlemen',only1:'Just',only2:'me and your project.',
+aboutP1:'I am an independent UX/UI designer. I take a project from idea to a finished website — no middlemen, you work directly with the person doing it.',
+aboutP2:'I take on few projects and do them well: meaning and structure first, then design, then code. The result is a website that sells and needs no rework.',
+v1t:'Design from scratch',v1d:'No templates or site builders: every project is drawn for your goals and your audience.',
+v2t:'Meaning before form',v2d:'Logic and user flow first, visuals second. Beautiful means easy to use.',
+v3t:'To launch and beyond',v3d:'I do not stop at the mockup: development, responsive layout, promotion and support after launch.',
+procLabel:'Process',procTitle:'How I work',procHint:'Four steps — and you have a finished website that brings in clients.',
+s1t:'Briefing',s1d:'We break down the task, goals and audience. You get a clear plan and an exact estimate.',
+s2t:'Prototype & design',s2d:'Structure and UX/UI. You see how the site will look before development starts.',
+s3t:'Development',s3d:'Layout, responsiveness, animation. The site loads fast and works on every device.',
+s4t:'Launch & promotion',s4d:'Publishing, basic SEO setup, first leads and ongoing support.',
+priceLabel:'Pricing',priceTitle:'Services & pricing',from:'from',
+p1t:'Business card site',p1d:'A focused digital presence. Makes the first impression and neatly answers a client’s basic questions.',
+p2t:'Landing Page',p2d:'A promo page focused on one product or service. A precise message structure that holds attention.',
+p3t:'Corporate website',p3d:'A multi-page system to present the business, its range of solutions and the scale of the company.',
+p4t:'E-Commerce',p4d:'A full online store: catalog, flexible filters, standalone cart and payment integration.',
+priceNote:'I will name the exact price after the briefing — it is free and with no obligation.',brief:'Book a briefing',
+contLabel:'Contact',contTitle:'Start a project',contText:'If you want a modern website with promotion, fill in the form and I will get back to you.',
+direct:'Or write directly:',copy:'Copy',copied:'Copied',fName:'Name',fContact:'Email or Telegram',fService:'Service',send:'Send request',
+sent:'Thank you! Your request is sent — I will get back to you soon.',sending:'Sending…',fail:'Could not send. Please write to websssites@gmail.com or on Telegram.',err:'Add your name and a contact so I can reply.',
+stay:'Let’s stay in touch',footRole:'UX/UI design · turnkey websites'}
+};
+const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const G=typeof window.gsap!=='undefined'&&window.ScrollTrigger&&window.SplitText;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const anim=!!G;
+let lang='ru';
+try{const s=localStorage.getItem('ws-lang');if(s==='ru'||s==='en')lang=s;}catch(e){}
+const fmt=(n,l)=>l==='ru'?n.toLocaleString('ru-RU').replace(/\s/g,' ')+' BYN':'BYN '+n.toLocaleString('en-US');
+
+function apply(l){
+  document.documentElement.lang=l;
+  $$('[data-k]').forEach(el=>{const v=D[l][el.dataset.k];if(v!=null)el.textContent=v;});
+  $$('[data-price]').forEach(el=>el.textContent=fmt(+el.dataset.price,l));
+  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+}
+
+let mm=null,first=true;
+function build(){
+  if(!anim)return;
+  mm=gsap.matchMedia();
+  mm.add({all:'all',desk:'(min-width: 900px)',fine:'(pointer: fine)'},ctx=>{
+    const {desk,fine}=ctx.conditions,off=[()=>{$('#pre').hidden=true;}];
+    if(first){
+      first=false;
+      const pre=$('#pre'),n={v:0};pre.hidden=false;
+      gsap.timeline()
+        .to(n,{v:100,duration:.8,ease:'power2.inOut',onUpdate(){$('#preN').textContent=Math.round(n.v);}})
+        .to(pre,{yPercent:-100,duration:.9,ease:'expo.inOut',onComplete(){pre.hidden=true;}})
+        .from('.hero .l',{yPercent:115,duration:1.2,ease:'expo.out',stagger:.12},'-=.45')
+        .from('.kicker',{opacity:0,y:16,duration:.8},'<')
+        .from('#nav',{yPercent:-160,duration:1,ease:'expo.out'},'<.1')
+        .from('.hero-txt>*',{y:40,opacity:0,duration:1,ease:'power3.out',stagger:.1},'<.3')
+        .from('.win',{y:160,opacity:0,rotate:i=>[-20,18,-12][i],duration:1.3,ease:'expo.out',stagger:.1},'<')
+        .from('.ring',{scale:.6,opacity:0,duration:1.6,ease:'power3.out',stagger:.15},'<');
+    }
+    /* reading progress + nav hides on the way down, returns on the way up */
+    const prog=$('#prog');prog.style.display='block';
+    gsap.fromTo(prog,{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
+    const navShow=v=>gsap.to('#nav',{yPercent:v?0:-170,duration:.45,ease:'power3.out',overwrite:'auto'});
+    ScrollTrigger.create({start:240,end:'max',onUpdate:s=>{if($('#menu').hidden)navShow(s.direction<0);},onLeaveBack:()=>navShow(true)});
+    off.push(()=>{prog.style.display='';gsap.set('#nav',{clearProps:'transform'});});
+    /* hero parallax */
+    if(!reduce)gsap.to('.wins',{yPercent:-18,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+    if(!reduce)gsap.to('.r1',{yPercent:30,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+    if(fine&&desk){
+      const hero=$('#hero'),ws=$$('.win').map(w=>({d:+w.dataset.d,x:gsap.quickTo(w,'x',{duration:.8,ease:'power3'}),y:gsap.quickTo(w,'y',{duration:.8,ease:'power3'})}));
+      const mv=e=>{const r=hero.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;ws.forEach(w=>{w.x(px*w.d);w.y(py*w.d);});};
+      hero.addEventListener('mousemove',mv);off.push(()=>hero.removeEventListener('mousemove',mv));
+      /* cursor + magnetic */
+      const c=$('#cur'),cx=gsap.quickTo(c,'x',{duration:.2,ease:'power3'}),cy=gsap.quickTo(c,'y',{duration:.2,ease:'power3'});
+      const cm=e=>{cx(e.clientX);cy(e.clientY);gsap.to(c,{opacity:1,duration:.2,overwrite:'auto'});};
+      const co=e=>{const on=!!e.target.closest('a,button,input');gsap.to(c,{scale:on?3.2:1,duration:.3,overwrite:'auto'});};
+      addEventListener('mousemove',cm);addEventListener('mouseover',co);off.push(()=>{removeEventListener('mousemove',cm);removeEventListener('mouseover',co);});
+      $$('.mag').forEach(m=>{
+        const a=e=>{const r=m.getBoundingClientRect();gsap.to(m,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.4,ease:'power3'});};
+        const b=()=>gsap.to(m,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'});
+        m.addEventListener('mousemove',a);m.addEventListener('mouseleave',b);off.push(()=>{m.removeEventListener('mousemove',a);m.removeEventListener('mouseleave',b);});
+      });
+    }
+    /* touch screens: scroll-driven versions of the hover/mouse effects */
+    if(!fine){
+      if(!reduce)$$('.win').forEach((w,i)=>gsap.to(w,{y:i%2?-14:12,rotate:i%2?1.6:-1.4,duration:2.4+i*.5,ease:'sine.inOut',yoyo:true,repeat:-1,delay:2.8}));
+      $$('.val,.plan').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 55%',end:'bottom 55%',toggleClass:{targets:el,className:'on'}}));
+    }
+    /* marquee leans with scroll speed */
+    const sk=gsap.quickTo('#mq','skewX',{duration:.5,ease:'power3'});
+    if(!reduce)ScrollTrigger.create({onUpdate:s=>sk(gsap.utils.clamp(-14,14,s.getVelocity()/-180))});
+    /* about */
+    const at=SplitText.create('#aboutTitle',{type:'words'});
+    gsap.fromTo(at.words,{opacity:.15},{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:'#aboutTitle',start:'top 85%',end:'bottom 45%',scrub:true}});
+    gsap.from('.val',{y:60,opacity:0,duration:1.1,ease:'expo.out',stagger:.12,scrollTrigger:{trigger:'#vals',start:'top 85%',once:true}});
+    /* strike-through: templates, builders, middlemen -> only me and your project */
+    const sk2=gsap.timeline({scrollTrigger:{trigger:'#strike',start:'top 82%',end:'top 38%',scrub:true}});
+    $$('#strike .st').forEach(st=>{sk2.fromTo(st.querySelector('i'),{scaleX:0},{scaleX:1,ease:'power2.inOut',duration:1}).fromTo(st,{color:'#F2F0EB'},{color:'#6E6C66',duration:.6},'<.4');});
+    sk2.fromTo('#only',{yPercent:60,opacity:0},{yPercent:0,opacity:1,ease:'power3.out',duration:1.2},'+=.1');
+    /* about stays, process slides up over it */
+    if(!reduce)gsap.timeline({scrollTrigger:{trigger:'#about',start:'bottom bottom',end:'+=100%',pin:true,pinSpacing:false,scrub:true}})
+      .to('#about',{scale:.93,opacity:.35,ease:'none'});
+    $$('.sec-t,.c-t').forEach(t=>{const s=SplitText.create(t,{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:110,duration:1.1,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:t,start:'top 88%',once:true}});});
+    $$('[data-rv]').forEach(el=>gsap.from(el,{y:50,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
+    /* process */
+    const steps=$$('.step');
+    if(desk&&!reduce){
+      const tl=gsap.timeline({scrollTrigger:{trigger:'#process',start:'top top',end:'+=1200',pin:true,scrub:1,snap:{snapTo:.25,duration:{min:.3,max:.7},delay:.08,ease:'power2.inOut'}}});
+      tl.fromTo('#fill',{scaleX:0},{scaleX:1,ease:'none',duration:4},0);
+      steps.forEach((s,i)=>tl.fromTo(s,{opacity:.2,y:24},{opacity:1,y:0,duration:.6,ease:'power2.out'},i*1));
+    }else{
+      gsap.fromTo('#fill',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.steps',start:'top 85%',end:'bottom 60%',scrub:true}});
+      steps.forEach(s=>gsap.from(s,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:s,start:'top 88%',once:true}}));
+    }
+    /* pricing */
+    gsap.from('.plan',{y:120,opacity:0,duration:1.1,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:'#plans',start:'top 82%',once:true}});
+    $$('[data-price]').forEach(el=>{const n=+el.dataset.price,o={v:0};gsap.to(o,{v:n,duration:1.6,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 94%',once:true},onUpdate(){el.textContent=fmt(Math.round(o.v/(n>=500?10:5))*(n>=500?10:5),lang);}});});
+    /* footer */
+    const ms=SplitText.create('#motto',{type:'words,chars',mask:'chars'});
+    gsap.from(ms.chars,{yPercent:110,duration:.9,ease:'expo.out',stagger:.025,scrollTrigger:{trigger:'#motto',start:'top 92%',once:true}});
+    return()=>off.forEach(f=>f());
+  });
+}
+
+const EASE=t=>Math.min(1,1.001-Math.pow(2,-10*t));
+let lenis=null;
+if(anim){gsap.registerPlugin(ScrollTrigger,SplitText);ScrollTrigger.config({ignoreMobileResize:true});
+  if(window.Lenis&&!reduce){try{lenis=new Lenis({duration:1.15,easing:EASE,smoothWheel:true,wheelMultiplier:.9,touchMultiplier:1.4});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}catch(e){lenis=null;}}
+}
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(!t)return;e.preventDefault();closeMenu();if(lenis){const d=Math.abs(t.getBoundingClientRect().top);lenis.scrollTo(t,{offset:-72,duration:Math.min(2.2,Math.max(1,d/2600)),easing:EASE});}else{const y=t.getBoundingClientRect().top+scrollY-72;scrollTo({top:y,behavior:reduce?'auto':'smooth'});}}));
+
+function setLang(l){
+  if(l===lang)return;lang=l;try{localStorage.setItem('ws-lang',l);}catch(e){}
+  if(!anim){apply(l);return;}
+  gsap.to('#main',{opacity:0,y:12,duration:.22,onComplete(){if(mm)mm.revert();apply(l);build();ScrollTrigger.refresh();gsap.to('#main',{opacity:1,y:0,duration:.35,clearProps:'transform'});}});
+  $$('#nav [data-k]').forEach(el=>el.textContent=D[l][el.dataset.k]);
+  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+}
+$$('.seg button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+const bg=$('#burger'),menu=$('#menu');
+function closeMenu(){if(menu.hidden)return;menu.hidden=true;bg.setAttribute('aria-expanded','false');if(lenis)lenis.start();document.body.style.overflow='';}
+bg.addEventListener('click',()=>{if(!menu.hidden){closeMenu();return;}menu.hidden=false;bg.setAttribute('aria-expanded','true');if(lenis)lenis.stop();document.body.style.overflow='hidden';
+  if(anim)gsap.from('#menu nav a,#menu .btn',{y:40,opacity:0,duration:.6,ease:'expo.out',stagger:.05});});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+addEventListener('resize',()=>{if(innerWidth>900)closeMenu();});
+const chips=$$('.chip'),pick=i=>chips.forEach((c,k)=>c.setAttribute('aria-pressed',String(k===i)));
+chips.forEach((c,i)=>c.addEventListener('click',()=>pick(i)));
+$$('[data-svc]').forEach(a=>a.addEventListener('click',()=>pick(+a.dataset.svc)));
+$('#form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target,st=$('#status'),btn=f.querySelector('.send'),name=$('#f-name').value.trim(),contact=$('#f-contact').value.trim();
+  if(!name||!contact){st.textContent=D[lang].err;(name?$('#f-contact'):$('#f-name')).focus();return;}
+  if(f._honey.value)return;
+  const svc=(chips.find(c=>c.getAttribute('aria-pressed')==='true')||{}).textContent||'';
+  btn.disabled=true;btn.textContent=D[lang].sending;st.textContent='';
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/websssites@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:'[BY] Новая заявка с сайта — '+svc,_template:'table',_captcha:'false',name,contact,service:svc,language:lang,version:'Беларусь (BYN)'})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||j.success==='false'||j.success===false)throw 0;
+    f.reset();pick(1);st.textContent=D[lang].sent;
+  }catch(_){st.textContent=D[lang].fail;}
+  finally{btn.disabled=false;btn.textContent=D[lang].send;}
+});
+$$('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const done=()=>{b.textContent=D[lang].copied;setTimeout(()=>{b.textContent=D[lang].copy;},1600);};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const w=getSelection();w.removeAllRanges();w.addRange(r);};
+  try{navigator.clipboard.writeText(b.dataset.copy).then(done,sel);}catch(e){sel();}
+}));
+
+apply(lang);
+const fontsReady=document.fonts?Promise.race([Promise.all(['500 1em Unbounded','700 1em Unbounded','800 1em Unbounded','400 1em Manrope'].map(f=>document.fonts.load(f))).then(()=>document.fonts.ready),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
+fontsReady.catch(()=>{}).then(()=>{build();if(anim)ScrollTrigger.refresh();});
+})();
+</script>
+
+</body>
+</html>
